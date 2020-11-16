@@ -26,7 +26,7 @@ class Bitree:
             if node.left:
                 stack.append(node.left)  
                 
-                
+     # 中序遍历           
     def inOrder(self,root):
         stack = []
         while stack or root:
@@ -37,10 +37,24 @@ class Bitree:
                 root = stack.pop()
                 print(root.val)
                 root = root.right
-            
+                
+     # 后序遍历           
+    def posOrder(self,root):
+        stack = [root]
+        stack2 = [] 
+        while stack:
+            node = stack.pop()
+            if node.left:
+                stack.append(node.left)
+            if node.right:
+                stack.append(node.right)
+            stack2.append(node)
+          # 将stack2中的元素出栈，即为后序遍历次序
+        for i in stack2[::-1]:
+            print(i.val)
 
 
-def DFS(root):#先序遍历
+def DFS(root):#类似先序遍历
     stack = [root]
     while stack:
         node = stack.pop()
@@ -83,18 +97,21 @@ def levelOrder(root):#层次遍历
         
         
 if __name__ == "__main__":
-    treeroot = Node("A",Node("B",Node("D"),Node("E")),Node("C",Node("F"),Node("G")))
-    
-    print("" ,"pre")
+    treeroot = Node("A",Node("B",Node("D"),Node("E",Node('H'))),Node("C",Node("F"),Node("G")))
+    bt = Bitree()
+    print("" ,"pre:")
     bt.preOrder(treeroot) 
-    print("" ,"in")
-    bt.inOrder(treeroot)  
-    print("BFS",end=" ")
-    BFS(treeroot)
-    print('')
-    print("DFS",end=" ")
+    print("" ,"in:")
+    bt.inOrder(treeroot) 
+    print("" ,"pos:")
+    bt.posOrder(treeroot) 
+    print("DFS:",end=" ")
     DFS(treeroot)
     print('')
+    print("BFS:",end=" ")
+    BFS(treeroot)
+    print('')
+    print('levelOrder:',end=" ")
     print(levelOrder(treeroot))
             
             
