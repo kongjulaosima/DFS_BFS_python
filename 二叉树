@@ -1,0 +1,105 @@
+class Node(object):
+    def __init__(self,val,left=None,right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+class Bitree:
+    def __init__(self, root=None):
+        self.root = root
+    
+    
+    def is_empty(self):
+        if self.root is None:
+            return True
+        else:
+            return False
+
+    # 先序遍历
+    def preOrder(self, root):
+        stack = [root]
+        while stack:
+            node = stack.pop()
+            print(node.val)
+            if node.right:
+                stack.append(node.right)
+            if node.left:
+                stack.append(node.left)  
+                
+                
+    def inOrder(self,root):
+        stack = []
+        while stack or root:
+            if root:
+                stack.append(root)
+                root = root.left
+            else:
+                root = stack.pop()
+                print(root.val)
+                root = root.right
+            
+
+
+def DFS(root):#先序遍历
+    stack = [root]
+    while stack:
+        node = stack.pop()
+        print(node.val,end=" ")
+        if node.right:
+            stack.append(node.right)
+        if node.left:
+            stack.append(node.left)   
+            
+            
+def BFS(root):#类似层次遍历
+    queue = [root]   
+    while queue:
+        node = queue.pop(0)
+        if node.left:
+            queue.append(node.left)
+        if node.right:
+            queue.append(node.right)
+        print(node.val,end=" ")
+        
+def levelOrder(root):#层次遍历
+    """
+    :type root: TreeNode
+    :rtype: List[List[int]]
+    """
+    queue = [root]   
+    ans=[]
+    while queue:
+        temp = []
+        for i in range(len(queue)):
+            node = queue.pop(0)
+            temp.append(node.val)
+            if node.left:
+                queue.append(node.left)
+            if node.right:
+                queue.append(node.right)
+        ans.append(temp)
+    return ans
+        
+        
+        
+if __name__ == "__main__":
+    treeroot = Node("A",Node("B",Node("D"),Node("E")),Node("C",Node("F"),Node("G")))
+    
+    print("" ,"pre")
+    bt.preOrder(treeroot) 
+    print("" ,"in")
+    bt.inOrder(treeroot)  
+    print("BFS",end=" ")
+    BFS(treeroot)
+    print('')
+    print("DFS",end=" ")
+    DFS(treeroot)
+    print('')
+    print(levelOrder(treeroot))
+            
+            
+            
+            
+            
+            
+            
