@@ -9,20 +9,12 @@ class Bitree:
         self.root = root
     
     
-    def is_empty(self):
-        if self.root is None:
-            return True
-        else:
-            return False
-
-    
     def preOrder(self, root):# 先序遍历
         ans = []
         stack = [root]
         while stack:
-            node = stack.pop()
+            node = stack.pop() # 弹出打印，先右后左
             ans.append(node.val)
-            #print(node.val)
             if node.right:
                 stack.append(node.right)
             if node.left:
@@ -41,31 +33,11 @@ class Bitree:
             else:    #2. 条件1无法时，弹出就打印，来到右，继续条件1
                 root = stack.pop()
                 ans.append(root.val)
-                #print(root.val)
                 root = root.right
         print(ans)
         return ans
            
-           
-    def posOrder(self, root):# 后序遍历     
-        stack = [root]
-        stack2 = [] 
-        while stack:
-            node = stack.pop()
-            if node.left:
-                stack.append(node.left)
-            if node.right:
-                stack.append(node.right)
-            stack2.append(node)
-          # 将stack2中的元素出栈，即为后序遍历次序
-        ans = []
-        for i in stack2[::-1]:
-            ans.append(i.val)
-            #print(i.val)
-        print(ans)
-        return ans
-        
-    def posOrder2(self, root):
+    def posOrder(self, root):# 后序遍历 
         ans = []    
         stack = [root]
         while stack :
@@ -80,7 +52,27 @@ class Bitree:
                 ans.append(node.val)
                 root = node
         print(ans)   
+        return ans      
+        
+        
+    def posOrder2(self, root):    
+        stack = [root]
+        stack2 = [] 
+        while stack:
+            node = stack.pop()
+            if node.left:
+                stack.append(node.left)
+            if node.right:
+                stack.append(node.right)
+            stack2.append(node)
+          # 将stack2中的元素出栈，即为后序遍历次序
+        ans = []
+        for i in stack2[::-1]:
+            ans.append(i.val)
+        print(ans)
         return ans
+        
+
 
     def levelOrder(self, root):#层次遍历
         queue = [root]   
@@ -89,7 +81,6 @@ class Bitree:
             temp = []
             for i in range(len(queue)):
                 node = queue.pop(0)
-                #print(node.val)
                 temp.append(node.val)
                 if node.left:
                     queue.append(node.left)
