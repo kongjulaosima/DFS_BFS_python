@@ -42,9 +42,9 @@ class Bitree:
         stack = [root]
         while stack :
             top = stack[-1]
-            if (top.left and  root != top.left and root != top.right) :                #左右都没处理
+            if (top.left and  top.left != root and top.right != root) :                #左右都没处理
                 stack.append(top.left)
-            elif (top.right and root != top.right):                                    #左边处理完了，右边没处理
+            elif (top.right and top.right != root):                                    #左边处理完了，右边没处理
                 stack.append(top.right)
             else:                                                                      #左右都处理完了
                 node = stack.pop()
