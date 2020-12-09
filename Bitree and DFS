@@ -9,11 +9,11 @@ class Bitree:
         self.root = root
     
     
-    def preOrder(self, root):# 先序遍历
+    def preOrder(self, root):                                                          # 先序遍历
         ans = []
         stack = [root]
         while stack:
-            node = stack.pop() # 弹出打印，先右后左
+            node = stack.pop()                                                         # 弹出打印，先右后左
             ans.append(node.val)
             if node.right:
                 stack.append(node.right)
@@ -23,31 +23,30 @@ class Bitree:
         return ans
             
             
-    def inOrder(self, root):# 中序遍历 
+    def inOrder(self, root):                                                           # 中序遍历 
         ans = []
         stack = []
         while stack or root:
-            if root: #1. 整条左边界依次入栈    
+            if root:                                                                   #1. 整条左边界依次入栈    
                 stack.append(root)
                 root = root.left
-            else:    #2. 条件1无法时，弹出就打印，来到右，继续条件1
+            else:                                                                      #2. 条件1无法时，弹出就打印，来到右，继续条件1
                 root = stack.pop()
                 ans.append(root.val)
                 root = root.right
         print(ans)
         return ans
            
-    def posOrder(self, root):# 后序遍历 
+    def posOrder(self, root):                                                          # 后序遍历 
         ans = []    
         stack = [root]
         while stack :
             top = stack[-1]
-            if (top.left and  root != top.left and root != top.right) :#左右都没处理
+            if (top.left and  root != top.left and root != top.right) :                #左右都没处理
                 stack.append(top.left)
-            elif (top.right and root != top.right):#左边处理完了，右边没处理
+            elif (top.right and root != top.right):                                    #左边处理完了，右边没处理
                 stack.append(top.right)
-            else:                                  #左右都处理完了
-                #root = top
+            else:                                                                      #左右都处理完了
                 node = stack.pop()
                 ans.append(node.val)
                 root = node
@@ -65,7 +64,7 @@ class Bitree:
             if node.right:
                 stack.append(node.right)
             stack2.append(node)
-          # 将stack2中的元素出栈，即为后序遍历次序
+                                                                                       # 将stack2中的元素出栈，即为后序遍历次序
         ans = []
         for i in stack2[::-1]:
             ans.append(i.val)
@@ -74,7 +73,7 @@ class Bitree:
         
 
 
-    def levelOrder(self, root):#层次遍历
+    def levelOrder(self, root):                                                        #层次遍历
         queue = [root]   
         ans=[]
         while queue:
@@ -91,7 +90,7 @@ class Bitree:
         return ans
         
         
-def DFS(root):#类似先序遍历
+def DFS(root):                                                                         #类似先序遍历
     stack = [root]
     while stack:
         node = stack.pop()
@@ -102,7 +101,7 @@ def DFS(root):#类似先序遍历
             stack.append(node.left)   
             
             
-def BFS(root):#类似层次遍历
+def BFS(root):                                                                         #类似层次遍历
     queue = [root]   
     while queue:
         node = queue.pop(0)
@@ -113,7 +112,7 @@ def BFS(root):#类似层次遍历
         print(node.val,end=" ")
   
           
-class Solution(object):#构造二叉树
+class Solution(object):                                                                #构造二叉树
     def buildTree(self, preorder, inorder):
         if not preorder: 
             return None
