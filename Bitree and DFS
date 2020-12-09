@@ -3,7 +3,8 @@ class Node(object):
         self.val = val
         self.left = left
         self.right = right
-
+ 
+ 
 class Bitree:
     def __init__(self, root=None):
         self.root = root
@@ -73,7 +74,7 @@ class Bitree:
         
 
 
-    def levelOrder(self, root):                                                        #层次遍历
+    def levelOrder(self, root):               #可以加个levermap记录节点与层数          #层次遍历
         queue = [root]   
         ans=[]
         while queue:
@@ -118,7 +119,7 @@ class Solution(object):                                                         
             return None
         
         x = preorder.pop(0)
-        node = TreeNode(x)
+        node = Node(x)
         i = inorder.index(x)
         
         node.left = self.buildTree(preorder[:i], inorder[:i])
@@ -130,22 +131,39 @@ class Solution(object):                                                         
         if not preorder:
             return None
             
-        root = TreeNode(preorder[0])
+        root = Node(preorder[0])
         stack = [root]
         inorderIndex = 0
         for i in range(1, len(preorder)):
             preorderVal = preorder[i]
             if  stack[-1].val != inorder[inorderIndex]:                
-                stack[-1].left = TreeNode(preorderVal)
+                stack[-1].left = Node(preorderVal)
                 stack.append(stack[-1].left)                
             else:
                 while stack and stack[-1].val == inorder[inorderIndex]:
                     node = stack.pop()
                     inorderIndex += 1
-                node.right = TreeNode(preorderVal)
+                node.right = Node(preorderVal)
                 stack.append(node.right)
         return root
-        
+
+
+def printTree(root):#打印整棵树的打印函数
+    if not root :
+        return
+    print('Binary Tree:')
+    printInOrder(root ,0,'H',17)
+    
+def printInOrder(root,height,preStr,length):#打印整棵树的打印函数
+    if not root:
+        return
+    printInOrder(root.right,height+1,'v',length)
+    string = preStr + str(root.val) + preStr
+    leftLen = (length - len(string))//2
+    rightLen = length - len(string) - leftLen
+    res = " "*leftLen+string+" "*rightLen
+    print(" "*height*length+res)
+    printInOrder(root.left,height+1,'^',length)   
         
 
 if __name__ == "__main__":
@@ -174,5 +192,7 @@ if __name__ == "__main__":
     
     preorder = [3,9,8,5,4,6,10,20,15,7]
     inorder  = [4,5,6,8,10,9,3,15,20,7]
-            
+    s = Solution()
+    r = s.buildTree(preorder, inorder)
+    printTree(r)
             
