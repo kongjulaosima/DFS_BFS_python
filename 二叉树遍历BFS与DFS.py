@@ -1,4 +1,4 @@
-class TreeNode(object):
+class TreeNode:
     def __init__(self, val, left=None, right=None):
         self.val = val
         self.left = left
@@ -98,8 +98,8 @@ class Bitree:
         return ans
 
 
-class Solution(object):  # 构造二叉树
-    def buildTree(self, preorder, inorder):
+class BuildTree:  # 构造二叉树
+    def build(self, preorder, inorder):
         if not preorder:
             return None
 
@@ -107,11 +107,11 @@ class Solution(object):  # 构造二叉树
         node = TreeNode(x)
         i = inorder.index(x)
 
-        node.left = self.buildTree(preorder[:i], inorder[:i])
-        node.right = self.buildTree(preorder[i:], inorder[i + 1:])
+        node.left = self.build(preorder[:i], inorder[:i])
+        node.right = self.build(preorder[i:], inorder[i + 1:])
         return node
 
-    def buildTree(self, preorder, inorder):
+    def build2(self, preorder, inorder):
         if not preorder:
             return None
 
@@ -153,14 +153,14 @@ def printInOrder(root, height, preStr, length):  # 打印整棵树的打印函�
 
 if __name__ == "__main__":
     treeroot = TreeNode("A", TreeNode("B", TreeNode("D"), TreeNode("E", TreeNode('H'))), TreeNode("C", TreeNode("F"), TreeNode("G")))
-    bt = Bitree()
-    print("preOrder:", bt.preOrder(treeroot))
-    print("inOrder:", bt.inOrder(treeroot))
-    print("posOrder:", bt.posOrder(treeroot), bt.posOrder2(treeroot))
-    print("levelOrder:", bt.levelOrder(treeroot))
-    print("DFS:", bt.DFS(treeroot))
-    print("BFS:", bt.BFS(treeroot))
+    t = Bitree()
+    print("preOrder:", t.preOrder(treeroot))
+    print("inOrder:", t.inOrder(treeroot))
+    print("posOrder:", t.posOrder(treeroot), t.posOrder2(treeroot))
+    print("levelOrder:", t.levelOrder(treeroot))
+    print("DFS:", t.DFS(treeroot))
+    print("BFS:", t.BFS(treeroot))
     
     preorder, inorder = [3, 9, 8, 5, 4, 6, 10, 20, 15, 7], [4, 5, 6, 8, 10, 9, 3, 15, 20, 7]
-    s = Solution()
-    printTree(s.buildTree(preorder, inorder))
+    b = BuildTree()
+    printTree(b.build(preorder, inorder))
