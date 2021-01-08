@@ -11,8 +11,7 @@ class Bitree:
     
     
     def preOrder(self, root):                                                          # 先序遍历
-        ans = []
-        stack = [root]
+        ans, stack = [], [root]
         while stack:
             node = stack.pop()                                                         # 弹出打印，先右后左
             ans.append(node.val)
@@ -20,13 +19,11 @@ class Bitree:
                 stack.append(node.right)
             if node.left:
                 stack.append(node.left)  
-        print(ans)
         return ans
             
             
     def inOrder(self, root):                                                           # 中序遍历 
-        ans = []
-        stack = []
+        ans, stack = [], []
         while stack or root:
             if root:                                                                   #1. 整条左边界依次入栈    
                 stack.append(root)
@@ -35,13 +32,11 @@ class Bitree:
                 root = stack.pop()
                 ans.append(root.val)
                 root = root.right
-        print(ans)
         return ans
            
            
     def posOrder(self, root):                                                          # 后序遍历 
-        ans = []    
-        stack = [root]
+        ans, stack = [], [root]
         while stack :
             top = stack[-1]
             if (top.left and  top.left != root and top.right != root) :                #左右都没处理
@@ -51,13 +46,12 @@ class Bitree:
             else:                                                                      #左右都处理完了
                 node = stack.pop()
                 ans.append(node.val)
-                root = node
-        print(ans)   
+                root = node 
         return ans      
         
         
     def posOrder2(self, root):    
-        stack = [root]
+        ans, stack = [], [root]
         stack2 = [] 
         while stack:
             node = stack.pop()
@@ -66,18 +60,15 @@ class Bitree:
             if node.right:
                 stack.append(node.right)
             stack2.append(node)
-                                                                                       # 将stack2中的元素出栈，即为后序遍历次序
-        ans = []
-        for i in stack2[::-1]:
+
+        for i in stack2[::-1]:                                                                        # 将stack2中的元素出栈，即为后序遍历次序
             ans.append(i.val)
-        print(ans)
         return ans
         
 
 
     def levelOrder(self, root):               #可以加个levermap记录节点与层数          #层次遍历
-        queue = [root]   
-        ans=[]
+        ans, queue = [], [root]
         while queue:
             temp = []
             for i in range(len(queue)):
@@ -88,30 +79,31 @@ class Bitree:
                 if node.right:
                     queue.append(node.right)
             ans.append(temp)
-        print(ans)
         return ans
         
         
 def DFS(root):                                                                         #类似先序遍历
-    stack = [root]
+    ans, stack = [], [root]
     while stack:
         node = stack.pop()
-        print(node.val,end=" ")
+        ans.append(node.val)
         if node.right:
             stack.append(node.right)
         if node.left:
             stack.append(node.left)   
-            
+    return ans
             
 def BFS(root):                                                                         #类似层次遍历
-    queue = [root]   
+    ans, queue = [], [root]   
     while queue:
         node = queue.pop(0)
+        ans.append(node.val)
         if node.left:
             queue.append(node.left)
         if node.right:
             queue.append(node.right)
-        print(node.val,end=" ")
+    return ans
+        
   
           
 class Solution(object):                                                                #构造二叉树
@@ -170,30 +162,14 @@ def printInOrder(root,height,preStr,length):#打印整棵树的打印函数
 if __name__ == "__main__":
     treeroot = Node("A",Node("B",Node("D"),Node("E",Node('H'))),Node("C",Node("F"),Node("G")))
     bt = Bitree()
-    print("" ,"preOrder:")
-    bt.preOrder(treeroot) 
-    
-    print("" ,"inOrder:")
-    bt.inOrder(treeroot) 
-    
-    print("" ,"posOrder:")
-    bt.posOrder(treeroot) 
-    bt.posOrder2(treeroot)
-    
-    print('',"levelOrder:")
-    bt.levelOrder(treeroot) 
-    
-    print("DFS:",end=" ")
-    DFS(treeroot)
-    print('')
-    print("BFS:",end=" ")
-    BFS(treeroot)
-    print('')
-
-    
+    print("preOrder:",bt.preOrder(treeroot))
+    print("inOrder:",bt.inOrder(treeroot))   
+    print("posOrder:", bt.posOrder(treeroot), bt.posOrder2(treeroot))  
+    print("levelOrder:",bt.levelOrder(treeroot) )  
+    print("DFS:",DFS(treeroot))       
+    print("BFS:",BFS(treeroot))      
     preorder = [3,9,8,5,4,6,10,20,15,7]
     inorder  = [4,5,6,8,10,9,3,15,20,7]
     s = Solution()
     root = s.buildTree(preorder, inorder)
     printTree(root)
-            
