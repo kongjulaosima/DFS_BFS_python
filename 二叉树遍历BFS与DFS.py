@@ -1,4 +1,4 @@
-class Node(object):
+class TreeNode(object):
     def __init__(self, val, left=None, right=None):
         self.val = val
         self.left = left
@@ -61,7 +61,7 @@ class Bitree:
             ans.append(i.val)
         return ans
 
-    def levelOrder(self, root):  # 可以加个levermap记录节点与层数          #层次遍历
+    def levelOrder(self, root):  # 层次遍历,可以加个levermap记录节点与层数
         ans, queue = [], [root]
         while queue:
             temp = []
@@ -152,7 +152,7 @@ def printInOrder(root, height, preStr, length):  # 打印整棵树的打印函�
 
 
 if __name__ == "__main__":
-    treeroot = Node("A", Node("B", Node("D"), Node("E", Node('H'))), Node("C", Node("F"), Node("G")))
+    treeroot = TreeNode("A", TreeNode("B", TreeNode("D"), TreeNode("E", TreeNode('H'))), TreeNode("C", TreeNode("F"), TreeNode("G")))
     bt = Bitree()
     print("preOrder:", bt.preOrder(treeroot))
     print("inOrder:", bt.inOrder(treeroot))
@@ -160,7 +160,7 @@ if __name__ == "__main__":
     print("levelOrder:", bt.levelOrder(treeroot))
     print("DFS:", bt.DFS(treeroot))
     print("BFS:", bt.BFS(treeroot))
-    preorder = [3, 9, 8, 5, 4, 6, 10, 20, 15, 7]
-    inorder = [4, 5, 6, 8, 10, 9, 3, 15, 20, 7]
+    
+    preorder, inorder= [3, 9, 8, 5, 4, 6, 10, 20, 15, 7], [4, 5, 6, 8, 10, 9, 3, 15, 20, 7]
     s = Solution()
     printTree(s.buildTree(preorder, inorder))
