@@ -104,7 +104,7 @@ class Solution(object):  # 构造二叉树
             return None
 
         x = preorder.pop(0)
-        node = Node(x)
+        node = TreeNode(x)
         i = inorder.index(x)
 
         node.left = self.buildTree(preorder[:i], inorder[:i])
@@ -115,19 +115,19 @@ class Solution(object):  # 构造二叉树
         if not preorder:
             return None
 
-        root = Node(preorder[0])
+        root = TreeNode(preorder[0])
         stack = [root]
         inorderIndex = 0
         for i in range(1, len(preorder)):
             preorderVal = preorder[i]
             if stack[-1].val != inorder[inorderIndex]:
-                stack[-1].left = Node(preorderVal)
+                stack[-1].left = TreeNode(preorderVal)
                 stack.append(stack[-1].left)
             else:
                 while stack and stack[-1].val == inorder[inorderIndex]:
                     node = stack.pop()
                     inorderIndex += 1
-                node.right = Node(preorderVal)
+                node.right = TreeNode(preorderVal)
                 stack.append(node.right)
         return root
 
