@@ -161,6 +161,6 @@ if __name__ == "__main__":
     print("DFS:", bt.DFS(treeroot))
     print("BFS:", bt.BFS(treeroot))
     
-    preorder, inorder= [3, 9, 8, 5, 4, 6, 10, 20, 15, 7], [4, 5, 6, 8, 10, 9, 3, 15, 20, 7]
+    preorder, inorder = [3, 9, 8, 5, 4, 6, 10, 20, 15, 7], [4, 5, 6, 8, 10, 9, 3, 15, 20, 7]
     s = Solution()
     printTree(s.buildTree(preorder, inorder))
