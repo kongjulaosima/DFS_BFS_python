@@ -152,7 +152,8 @@ def printInOrder(root, height, preStr, length):  # 打印整棵树的打印函�
 
 
 if __name__ == "__main__":
-    treeroot = TreeNode("A", TreeNode("B", TreeNode("D"), TreeNode("E", TreeNode('H'))), TreeNode("C", TreeNode("F"), TreeNode("G")))
+    treeroot = TreeNode("A", TreeNode("B", TreeNode("D"), TreeNode("E", TreeNode('H'))),
+                        TreeNode("C", TreeNode("F"), TreeNode("G")))
     t = Bitree()
     print("preOrder:", t.preOrder(treeroot))
     print("inOrder:", t.inOrder(treeroot))
@@ -160,7 +161,7 @@ if __name__ == "__main__":
     print("levelOrder:", t.levelOrder(treeroot))
     print("DFS:", t.DFS(treeroot))
     print("BFS:", t.BFS(treeroot))
-    
+
     preorder, inorder = [3, 9, 8, 5, 4, 6, 10, 20, 15, 7], [4, 5, 6, 8, 10, 9, 3, 15, 20, 7]
     b = BuildTree()
     printTree(b.build(preorder, inorder))
